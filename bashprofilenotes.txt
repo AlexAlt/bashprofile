@@ -1,0 +1,23 @@
+export PATH=/usr/local/bin:$PATH
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+export EDITOR='subl -w'
+
+chruby ruby-2.2.3
+
+# Prompt
+function parse_git_branch {
+ ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "("${ref#refs/heads/}") "
+}
+
+PS1="\w \$(parse_git_branch)· "
+
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+export PGDATA=/usr/local/var/postgres
+export PGHOST=/tmp
+
+export NVM_DIR="/Users/alexandraaltieri/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
