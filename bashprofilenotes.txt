@@ -21,3 +21,42 @@ export PGHOST=/tmp
 
 export NVM_DIR="/Users/alexandraaltieri/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+
+
+########## from RF
+source ~/.bashrc
+export EDITOR="subl -w"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/Applications/LibreOffice.app/Contents/MacOS:$PATH"
+# export PS1="\u@\h:\w $(git_prompt)$ "
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+alias be="bundle exec"
+alias brake="bundle exec rake"
+alias gg="git log --pretty=format:'%C(yellow)%h %C(red)%ad %C(blue)%an%C(green)%d %C(reset)%s' --date=short"
+alias ll="ls -al"
+alias rpry='bundle exec pry -r ./config/environment'
+alias gitx='open -a GitX .'
+
+# Git
+source ~/git/contrib/completion/git-completion.bash
+
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
+#export PS1='\n\[\e[1;36m\]\w\[\e[0m\] $(__git_ps1 "[\[\e[0;32m\]%s\[\e[0m\]\[\e[0;33m\]$(parse_git_dirty)\[\e[0m\]]")\n\$ \[\e[0m\]\w \$(parse_git_branch)· '
+
+#Prompt
+function parse_git_branch {
+ ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "("${ref#refs/heads/}") "
+}
+
+PS1="\w \$(parse_git_branch)· "
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
